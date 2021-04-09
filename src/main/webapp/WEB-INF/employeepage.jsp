@@ -12,7 +12,5 @@
         <h1>Hello ${sessionScope.email} </h1>
         You are now logged in as a EMPLOYEE of our wonderful site.
 
-        <p><a href="timepage">How about trying out another site with a date time?</a>
-
     </jsp:body>
 </t:genericpage>
