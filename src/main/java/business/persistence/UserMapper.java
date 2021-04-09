@@ -72,7 +72,7 @@ public class UserMapper
         }
         catch (SQLException ex)
         {
-            throw new UserException("Connection to datbase could not be established");
+            throw new UserException("Connection to database could not be established");
         }
     }
 
