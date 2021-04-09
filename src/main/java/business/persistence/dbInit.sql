@@ -1,10 +1,11 @@
--- noinspection SqlDialectInspectionForFile
+/*
+    You might want to rename the database to your own needs.
+    If so, please substitute `startcode` with whatever your project is called.
+ */
 
--- noinspection SqlNoDataSourceInspectionForFile
+CREATE DATABASE  IF NOT EXISTS `startcode`;
 
-CREATE DATABASE  IF NOT EXISTS `useradmin`;
-
-USE `useradmin`;
+USE `startcode`;
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (

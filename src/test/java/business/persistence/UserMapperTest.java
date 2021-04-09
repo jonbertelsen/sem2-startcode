@@ -5,23 +5,15 @@ import business.exceptions.UserException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UserMapperTest {
-//    Test date in the UsersTest table
-//    INSERT INTO `UsersTest` VALUES 
-//    (1,'jens@somewhere.com','jensen','customer'),
-//    (2,'ken@somewhere.com','kensen','customer'),
-//    (3,'robin@somewhere.com','batman','employee'),
-//    (4,'someone@nowhere.com','sesam','customer');
 
     private final static String USER = "dev";
     private final static String PASSWORD = "ax2";
-    private final static String URL = "jdbc:mysql://localhost:3306/useradmin?serverTimezone=CET&useSSL=false";
+    private final static String URL = "jdbc:mysql://localhost:3306/startcode_test?serverTimezone=CET&useSSL=false";
 
     private static Database database;
     private static UserMapper userMapper;
@@ -29,7 +21,7 @@ public class UserMapperTest {
     @BeforeAll
     public static void setUpClass() {
         try {
-            database = new Database(USER, PASSWORD, URL);   // her sker der sådan
+            database = new Database(USER, PASSWORD, URL);
             userMapper = new UserMapper(database);
         } catch (ClassNotFoundException e) {   // kan ikke finde driveren i database klassen
             fail("Database connection failed. Missing jdbc driver");
@@ -41,9 +33,13 @@ public class UserMapperTest {
 
             // reset test database
             try ( Statement stmt = database.connect().createStatement() ) {
-                stmt.execute( "drop table if exists Users" );
-                stmt.execute( "create table Users like UsersTest" );
-                stmt.execute( "insert into Users select * from UsersTest" );
+                stmt.execute("drop table if exists users" );
+                stmt.execute("create table startcode_test.users LIKE startcode.users;" );
+                stmt.execute(
+                    "insert into users values " +
+                    "(1,'jens@somewhere.com','jensen','customer'), " +
+                    "(2,'ken@somewhere.com','kensen','customer'), " +
+                    "(3,'robin@somewhere.com','batman','employee')");
             } catch (SQLException ex) {
             System.out.println( "Could not open connection to database: " + ex.getMessage() );
         }

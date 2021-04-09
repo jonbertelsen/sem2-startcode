@@ -1,4 +1,4 @@
-# Template for Java webprojekts
+# Template for Java webprojects
 
 This startcode is for 2. semester on Computer Science in Lyngby and Bornholm. It has been
 developed by the teachers over the past 3-4 years. Java webprojects can obviously be
@@ -33,18 +33,63 @@ basic skills and techniques. Step by step.
 - A login page
 - A registration / sign up page
 - A logout method
-- A customer page that can only be accessed by a logged in user with a customer role
-- An Employee page that can only be accessed by a logged in user with an employee role
-- A layered architecture with frontend, facades, persistence, entities, services and more
-- A database and datamapper to handle userlogins
-- A skeleton for exceptionhandling and logging
+- A customer page that can only be accessed by a logged-in user with a customer role
+- An Employee page that can only be accessed by a logged-in user with an employee role
+- A layered architecture with a frontend, facades, persistence, entities, services and more
+- A database and datamapper to handle user logins
+- A skeleton for exception handling and logging
 - The ability to handle deep url-linking
-- A basic security layer, that protects certain pages based on userlogin and roles
+- A basic security layer, that protects certain pages based on user login and roles
 - An easy way to initialize datastructures for the application in first contact
 - The JDBC connection is prepared to be initialized from environment variables to avoid
 exposing credentials on GitHub.
  
-## Dokumentation
+## Documentation
 
+### How to install the startcode for development
 
+You need three main steps to get started:
+
+1. Git:
+   
+   1.1 Clone the project (not fork): [https://github.com/jonbertelsen/sem2-startcode](https://github.com/jonbertelsen/sem2-startcode)
+   
+   1.2 Rename the project folder if needed (to cupcake, webshop etc)
+   
+   1.3 Make it your own Git project by first removing the `.git` folder (use `rm -rf .git/`). Then 
+        create a fresh repo with `git init`, `git branch -m main`,  `git add .`, `git commit -m "First commit"`
+   
+   1.4 Create a repo on Github and push project
+
+2. Database:
+
+   2.1 Create a schema/database for the project in MySql. Ex: 'cupcake'
+
+   2.2 Create a test-database for the integration tests in MySql. Ex: 'cupcake_test'
+
+   2.2 Run the `dbInit.sql` script in the persistence folder to populate database with user a table. Observe
+   carefully the instructions in the script file if you need renaming.
+   
+2. Java / IntelliJ:
+   
+   3.1 Open project in IntelliJ
+   
+   3.2 Rename the project to your own needs
+   
+   3.2.1 Right-click the project root in IntelliJ and rename
+   
+   3.2.2 Change the name sem2-startcode in the pom.xml file where needed
+
+   3.3  Rename the database names in two places:
+
+   3.3.1 In the top of the FrontController.java file: 
+   Change `startcode` in the jdbc string `jdbc:mysql://localhost:3306/startcode?serverTimezone=CET`
+   
+   3.3.2 In the top of the UserMapperTest.java class, change the `startcode_test` in the jdbc string.
+   
+   3.4 Create a Tomcat configuration by running the project
+   
+
+   
+  
 
