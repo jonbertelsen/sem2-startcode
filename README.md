@@ -11,22 +11,23 @@ systems. It all depends on the scope of the project, the team, and the context. 
 we are on an educational track, we need to keep in mind, that we are here to learn a lot of
 basic skills and techniques. Step by step.
 
-## The startcode is:
+### The startcode is:
  
 - A client/server multipage application developed in Java, JSP, html, css, and bootstrap.
 - Built with Maven
 - Maintained in a GitHub repository
 - Supposed to be deployed on a Tomcat Webcontainer v. 8 or 9.
 
-## The startcode makes use of several software patterns:
+### The startcode makes use of several design patterns:
 
 - Model View Controller (MVC pattern)
 - Frontcontroller pattern
 - Command pattern
 - Singleton pattern
 - Facade pattern
+- Dependency injection
 
-## The startcode contains these features out of the box:
+### The startcode contains these features out of the box:
 
 - A frontpage with a header, body, footer, main menu, and links to login and sign up page
 - A basic design template with html, css, and bootstrap
@@ -44,9 +45,9 @@ basic skills and techniques. Step by step.
 - The JDBC connection is prepared to be initialized from environment variables to avoid
 exposing credentials on GitHub.
  
-## Documentation
+# Documentation
 
-### How to install the startcode for development
+## How to install the startcode for development
 
 You need three main steps to get started:
 
@@ -71,7 +72,84 @@ You need three main steps to get started:
         2. In the top of the UserMapperTest.java class, change the `startcode_test` in the jdbc string.
     4. Create a Tomcat configuration by running the project
    
+## Architecture
 
+The project uses a layered architecture. The layering is not strict, but in general, the principle
+is that no layer should reference other than one layer below itself. We have also tried to
+build the architecture around the MVC design pattern.
+
+![architecture](documentation/images/architecture.jpg)
    
+### The Client
+Is typically a web-browser that `requests` resources on a webserver through the `http protocol`. 
+A static html page, an image, a css-file, a javascript file or the result from a dynamic jsp page.
+
+Note that
+
+-  Everything that happens on the client-side is usually related to `frontend programming`
+-  The request is typically a `GET-request` or a `POST-request`.
+-  It is possible to send parameters along with the request. With `GET` is happens over the uri, like
+   `http://localhost:8080/user.jsp?id=23`. With `POST` as form parameters.
+
+### The (web)server
+Application code running on a web server is usually called the `backend`.
+On the 2. semester we use Tomcat as our web server. Technically speaking Tomcat is called a 
+servlet container, because its primary purpose is to process java servlets. However, Tomcat
+is also able to act as a webserver, serving static content. The web application deployed on
+Tomcat can be organized in various ways. The startcode backend architecture is divided into a
+web layer and a business layer. 
+
+#### The Web layer
+Everything in the web layer is closely related to receiving a request, getting stuff done in the
+business layer, and then sending a response to the desired receiver. We are relying heavily on
+a `Frontcontroller` to organize the flow of the application. Before the request hits the 
+frontcontroller, an `authorization filter` will check that the client making the request has the
+necessary credentials to view the requested resource. This means that a basic security check is done
+up front. If the user is allowed into the frontcontroller, the frontcontroller interprets the
+uri as a command. Depending on the command, a corresponding java method 
+is executed on the server, and a response is sent back to the client. 
+
+*This cycle of client/server request/response is the most foundational thing to understand about
+web programming. In this architecture it can be summed up as:*
+
+- A request is sent to the webserver. Ex: http://localhost:8080/customers
+- The authorization filter checks for access rights
+- The frontcontroller uses `customers` as a command and executes a designated method. Let's call it
+  the `customer command`
+- The `customer command` returns a name of a target page, that should be sent back to the client. 
+  The page is generated on the server (jsp) and returned.
   
+That's it. This is a concrete example to make easier to understand:
+
+- We want to view a list of all customers in the browser and requests http://localhost:8080/customers
+- The frontcontroller takes the command `customers`, and executes a piece of code:
+    - We want to pull a list of customers from the database
+    - A method is called in the `service layer`. Let's call it `getAllCustomers`. In our
+      architecture we use a number of so-called facade classes to wrap the `datamappers` in the 
+      `persistence layer`. The facades are used to decouple the layers, so it will be easier one day
+      to swap the persistence layer with a total new implementation without affecting the 
+      service layer and beyond.
+    - The `getAllCustomers method` in the `customerMapper class` in the `persistence layer` fetches
+      all customers and return them to the facade layer.
+    - The `getAllCustomers method` in the facade layer returns an arraylist of customers 
+      to the `customer command` method.
+    - The `customer command` method attatches the list of customers to the request and sends it
+        back to the frontcontroller
+    - The frontcontroller forwards the flow to the customer.jsp page, that generates the final page
+      that is sent back to the client.
+      
+This can also be visualized as this:
+
+![architecture](documentation/images/lifecycle.gif)
+
+
+#### The Business layer
+Everything in the `business layer` is closely related to the business domain, and core 
+functionality of the application.
+
+
+
+
+
+
 
