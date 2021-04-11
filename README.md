@@ -11,14 +11,14 @@ systems. It all depends on the scope of the project, the team, and the context. 
 we are on an educational track, we need to keep in mind, that we are here to learn a lot of
 basic skills and techniques. Step by step.
 
-### The startcode is:
+** The startcode is: **
  
 - A client/server multipage application developed in Java, JSP, html, css, and bootstrap.
 - Built with Maven
 - Maintained in a GitHub repository
 - Supposed to be deployed on a Tomcat Webcontainer v. 8 or 9.
 
-### The startcode makes use of several design patterns:
+** The startcode makes use of several design patterns: **
 
 - Model View Controller (MVC pattern)
 - Frontcontroller pattern
@@ -27,7 +27,7 @@ basic skills and techniques. Step by step.
 - Facade pattern
 - Dependency injection
 
-### The startcode contains these features out of the box:
+** The startcode contains these features out of the box: **
 
 - A frontpage with a header, body, footer, main menu, and links to login and sign up page
 - A basic design template with html, css, and bootstrap
@@ -44,8 +44,6 @@ basic skills and techniques. Step by step.
 - An easy way to initialize datastructures for the application at first contact
 - The JDBC connection is prepared to be initialized from environment variables to avoid
 exposing credentials on GitHub.
- 
-# Documentation
 
 ## How to install the startcode for development
 
@@ -54,25 +52,26 @@ You need three main steps to get started:
 1. Git:
     1. Clone the project (not fork): [https://github.com/jonbertelsen/sem2-startcode](https://github.com/jonbertelsen/sem2-startcode)
     2. Rename the project folder if needed (to cupcake, webshop etc)
-    3. Make it your own Git project by first removing the `.git` folder (use `rm -rf .git/`). Then 
-        create a fresh repo with `git init`, `git branch -m main`,  `git add .`, `git commit -m "First commit"`
+    3. Make it your own Git project by first removing the `.git` folder (use `rm -rf .git/`). Then
+       create a fresh repo with `git init`, `git branch -m main`,  `git add .`, `git commit -m "First commit"`
     4. Create a repo on Github and push project
 2. Database:
     1. Create a schema/database for the project in MySql. Ex: 'cupcake'
     2. Create a test-database for the integration tests in MySql. Ex: 'cupcake_test'
     3. Run the `dbInit.sql` script in the persistence folder to populate database with user a table. Observe
-   carefully the instructions in the script file if you need renaming.
+       carefully the instructions in the script file if you need renaming.
 3. Java / IntelliJ:
     1. Open project in IntelliJ
-    2. Rename the project to your own needs 
+    2. Rename the project to your own needs
         1. Right-click the project root in IntelliJ and rename
         2. Change the name sem2-startcode in the pom.xml file where needed
     3.  Rename the database names in two places:
         1. In the top of the FrontController.java file: Change `startcode` in the jdbc string `jdbc:mysql://localhost:3306/startcode?serverTimezone=CET`
         2. In the top of the UserMapperTest.java class, change the `startcode_test` in the jdbc string.
     4. Create a Tomcat configuration by running the project
-   
-## Architecture
+
+
+# Architecture
 
 The project uses a layered architecture. The layering is not strict, but in general, the principle
 is that no layer should reference other than one layer below itself. We have also tried to
@@ -80,7 +79,7 @@ build the architecture around the MVC design pattern.
 
 ![architecture](documentation/images/architecture.jpg)
    
-### The Client
+## The Client
 Is typically a web-browser that `requests` resources on a webserver through the `http protocol`. 
 A static html page, an image, a css-file, a javascript file or the result from a dynamic jsp page.
 
@@ -91,7 +90,7 @@ Note that
 -  It is possible to send parameters along with the request. With `GET` is happens over the uri, like
    `http://localhost:8080/user.jsp?id=23`. With `POST` as form parameters.
 
-### The (web)server
+## The (web)server
 Application code running on a web server is usually called the `backend`.
 On the 2. semester we use Tomcat as our web server. Technically speaking Tomcat is called a 
 servlet container, because its primary purpose is to process java servlets. However, Tomcat
@@ -99,7 +98,7 @@ is also able to act as a webserver, serving static content. The web application 
 Tomcat can be organized in various ways. The startcode backend architecture is divided into a
 web layer and a business layer. 
 
-#### The Web Layer
+### The Web Layer
 Everything in the web layer is closely related to receiving a request, getting stuff done in the
 business layer, and then sending a response to the desired receiver. We are relying heavily on
 a `Frontcontroller` to organize the flow of the application. The web layer consists of:
@@ -142,7 +141,7 @@ business layer, but the example is showing a request needing a lookup in the dat
 
 ![architecture](documentation/images/lifecycle.gif)
 
-#### The Business layer
+### The Business layer
 Everything in the `business layer` is closely related to the business domain, and core 
 functionality of the application. 
 
