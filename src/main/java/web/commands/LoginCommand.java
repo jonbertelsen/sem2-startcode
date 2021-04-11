@@ -31,7 +31,7 @@ public class LoginCommand extends CommandUnprotectedPage
 
         session.setAttribute("user", user);
         session.setAttribute("role", user.getRole());
-        session.setAttribute("email", email);  // ellers skal man skrive  user.email på jsp siderne og det er sgu lidt mærkeligt at man har adgang til private felter. Men måske er det meget fedt , jeg ved det ikke
+        session.setAttribute("email", email);
 
         String pageToShow =  user.getRole() + "page";
         return REDIRECT_INDICATOR + pageToShow;
