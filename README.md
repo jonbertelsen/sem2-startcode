@@ -11,14 +11,14 @@ systems. It all depends on the scope of the project, the team, and the context. 
 we are on an educational track, we need to keep in mind, that we are here to learn a lot of
 basic skills and techniques. Step by step.
 
-** The startcode is: **
+**The startcode is:**
  
 - A client/server multipage application developed in Java, JSP, html, css, and bootstrap.
 - Built with Maven
 - Maintained in a GitHub repository
 - Supposed to be deployed on a Tomcat Webcontainer v. 8 or 9.
 
-** The startcode makes use of several design patterns: **
+**The startcode makes use of several design patterns:**
 
 - Model View Controller (MVC pattern)
 - Frontcontroller pattern
@@ -27,7 +27,7 @@ basic skills and techniques. Step by step.
 - Facade pattern
 - Dependency injection
 
-** The startcode contains these features out of the box: **
+**The startcode contains these features out of the box:**
 
 - A frontpage with a header, body, footer, main menu, and links to login and sign up page
 - A basic design template with html, css, and bootstrap
