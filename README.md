@@ -41,7 +41,7 @@ basic skills and techniques. Step by step.
 - A skeleton for exception handling and logging
 - The ability to handle deep url-linking
 - A basic security layer, that protects certain pages based on user login and roles
-- An easy way to initialize datastructures for the application in first contact
+- An easy way to initialize datastructures for the application at first contact
 - The JDBC connection is prepared to be initialized from environment variables to avoid
 exposing credentials on GitHub.
  
@@ -99,53 +99,65 @@ is also able to act as a webserver, serving static content. The web application 
 Tomcat can be organized in various ways. The startcode backend architecture is divided into a
 web layer and a business layer. 
 
-#### The Web layer
+#### The Web Layer
 Everything in the web layer is closely related to receiving a request, getting stuff done in the
 business layer, and then sending a response to the desired receiver. We are relying heavily on
-a `Frontcontroller` to organize the flow of the application. Before the request hits the 
-frontcontroller, an `authorization filter` will check that the client making the request has the
-necessary credentials to view the requested resource. This means that a basic security check is done
-up front. If the user is allowed into the frontcontroller, the frontcontroller interprets the
-uri as a command. Depending on the command, a corresponding java method 
-is executed on the server, and a response is sent back to the client. 
+a `Frontcontroller` to organize the flow of the application. The web layer consists of:
 
-*This cycle of client/server request/response is the most foundational thing to understand about
-web programming. In this architecture it can be summed up as:*
-
-- A request is sent to the webserver. Ex: http://localhost:8080/customers
-- The authorization filter checks for access rights
-- The frontcontroller uses `customers` as a command and executes a designated method. Let's call it
-  the `customer command`
-- The `customer command` returns a name of a target page, that should be sent back to the client. 
-  The page is generated on the server (jsp) and returned.
-  
-That's it. This is a concrete example to make easier to understand:
-
-- We want to view a list of all customers in the browser and requests http://localhost:8080/customers
-- The frontcontroller takes the command `customers`, and executes a piece of code:
-    - We want to pull a list of customers from the database
-    - A method is called in the `service layer`. Let's call it `getAllCustomers`. In our
-      architecture we use a number of so-called facade classes to wrap the `datamappers` in the 
-      `persistence layer`. The facades are used to decouple the layers, so it will be easier one day
-      to swap the persistence layer with a total new implementation without affecting the 
-      service layer and beyond.
-    - The `getAllCustomers method` in the `customerMapper class` in the `persistence layer` fetches
-      all customers and return them to the facade layer.
-    - The `getAllCustomers method` in the facade layer returns an arraylist of customers 
-      to the `customer command` method.
-    - The `customer command` method attatches the list of customers to the request and sends it
-        back to the frontcontroller
-    - The frontcontroller forwards the flow to the customer.jsp page, that generates the final page
-      that is sent back to the client.
-      
-This can also be visualized as this:
+- `Authentication Filter`: Checks that the client making the request has the
+  necessary credentials to view the requested resource. This means that a basic security check is done
+  up front by checking for all protected pages and commands:
+    1. That the user is logged in
+    2. That the user has the required role for accessing the page
+  If the request passes the security check, it will be passed on to the `FrontController`.
+- `FrontController`: The central hub for directing all requests in and out of the web server. 
+  The FrontController receives a command and a request object with parameters sent from the client. 
+  The command is extracted from the `URI` and looked up in a hashmap in the `Command` class. After the
+  command is executed, the FrontController redirects the request to a target jsp page.
+- `Command Class`: This class is implementing a Command Pattern as an abstract class. The commands
+are stored in a hashmap<k,v> with the command name as the value and an instantiated subclass of 
+  the Command class depending on the use case. The two subclasses are:
+    1. `CommandProtectedPage`: This subclass is used for protected pages. It takes two parameters
+       in the constructor: `pageToShow` and `role`. The first is the name of the destination page 
+       that the FrontController should redirect the flow to after the execution of the command, and the
+       `role` parameter is the name of the user role, that is needed for executing the command. In this
+       version of the startcode, it is only possible to have one role for each page. This could be 
+       extended to include more roles.
+    2. `CommandUnProtectedPage`: This subclass is used if the command should be executed for any request
+       without needing to be logged in. The constructor only takes one parameter, `pageToShow`.
+A third subclass named `UnknownCommand` also exists. This will be returned if the given command 
+       doesn't exist in the hashmap. This will result in a `404 Page not found` response.
+- `View layer`: A collection of files in the webapp folder that pulls together the final rendering
+  of the response. In this version of the startcode, most jsp-files are held in the `WEB_INF` folder.
+  Files in the `WEB-INF` folder cannot be accessed unless the request is passed through a servlet. It 
+  means that the pages have a basic protection, and another advantage is that we can initialize 
+  the webapplication in the FrontController. Note the folder named `tags` in the `WEB-INF` folder. It
+  contains a template file called `genericpage.tag`. It's a basic template for jsp pages. This means
+  that we can re-use a lot of html, css, and Bootstrap and focus on what is in <body> part. As a rule
+  of thumb, we avoid using Java Scriptlets `<% %>` in the `View layer` and prefer JSTL and Expression Language.
+  Likewise, we avoid generating HTML outside the `View layer`. 
+       
+The flow of a request can be visualization like below. Sometimes we don't need to pull on the
+business layer, but the example is showing a request needing a lookup in the database:
 
 ![architecture](documentation/images/lifecycle.gif)
 
-
 #### The Business layer
 Everything in the `business layer` is closely related to the business domain, and core 
-functionality of the application.
+functionality of the application. 
+
+- `entities`: Contains base classes that typically corresponds to a table in the database. 
+  Entity classes often have an id attribute. Examples could be Customer, Order, Product etc.
+- `services layer`: Contains classes that supports the application with calculations, 
+facade methods and various helper methods.
+- `exceptions`: Contains classes that typically are used when throwing exceptions.
+- `persistence layer`: Contains classes that are used to fetch and save data from external sources. 
+Most often a database. In this startcode we name those classes `datamappers`. We have also included
+a special class called `Database.java` in the `persistence layer` that is used for connecting to
+the database through `JDBC`. Note that the login credentials and URI for the database is injected
+into the constructor of the `Database.java`. This is called `dependency injection`. The reason is
+that we wish to be able to change the connection string and user credentials when testing the 
+class. And using `dependency injection` is a way to provide that possibility.
 
 
 
