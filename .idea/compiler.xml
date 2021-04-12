@@ -6,16 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="sem2-startcode" />
+        <module name="bmi" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="sem2-startcode" target="8" />
+      <module name="bmi" target="8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="sem2-startcode" options="-endorseddirs $PROJECT_DIR$/target/endorsed" />
+      <module name="bmi" options="-endorseddirs $PROJECT_DIR$/target/endorsed" />
     </option>
   </component>
 </project>
