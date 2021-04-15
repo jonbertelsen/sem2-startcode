@@ -44,7 +44,7 @@ deploy our websites manually. This is how it's done:
 export DEPLOYED="PROD"
 export JDBC_USER="bmi"
 export JDBC_PASSWORD="sikkertpassword"
-export JDBC_CONNECTION_STRING="jdbc:mysql://localhost:3306/bmi?serverTimezone=CET&useSSL=false"
+export JDBC_CONNECTION_STRING="jdbc:mysql://localhost:3306/bmi?serverTimezone=CET"
 ```
 13. Restart Tomcat: `> service tomcat restart`
 
