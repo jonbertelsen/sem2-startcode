@@ -32,7 +32,7 @@ deploy our websites manually. This is how it's done:
 
 ## C) Set up environment variables for database user credentials:
 
-11. Gå i "super user mode": `> su -i`
+11. Exit fra MySql og gå i "super user mode": `> sudo su`
     
 12. Opret filen `setenv.sh` i `/opt/tomcat/bin` med nano og lav 3 miljøvariabler:
 
