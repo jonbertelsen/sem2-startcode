@@ -18,7 +18,7 @@ deploy our websites manually. This is how it's done:
 7.  Check the database is imported correctly:
     - `> show databases;`
     - `> use bmi;`
-    - `> select * from sports;`
+    - `> select * from sport;`
     
 ## B) Set up a database user for the webapplication:
 
