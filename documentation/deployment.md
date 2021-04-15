@@ -26,7 +26,7 @@ deploy our websites manually. This is how it's done:
 ## B) Set up a database user for the webapplication:
 
 8.  Create a database user (call it "bmi"):
-    - `> CREATE USER 'bmi'@'localhost' IDENTIFIED WITH mysql_native_password BY 'sikkertpassword';`
+    - `> CREATE USER 'bmi'@'localhost' IDENTIFIED BY 'sikkertpassword';`
 9. Create a few, but necessary privileges:
     - `> GRANT SELECT, INSERT, UPDATE, DELETE ON bmi.* to 'bmi'@'localhost';`
 10. Check everything is okay:
