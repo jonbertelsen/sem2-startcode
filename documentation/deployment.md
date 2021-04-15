@@ -24,7 +24,7 @@ deploy our websites manually. This is how it's done:
 
 8.  Create a database user (call it "bmi"):
     - `> CREATE USER 'bmi'@'localhost' IDENTIFIED WITH mysql_native_password BY 'sikkertpassword';`
-9: Create a few, but necessary privileges:
+9. Create a few, but necessary privileges:
     - `> GRANT SELECT, INSERT, UPDATE, DELETE ON bmi.* to 'bmi'@'localhost';`
 10. Check everything is okay:
     - `> show grants for 'bmi'@'localhost';`
