@@ -28,7 +28,7 @@ deploy our websites manually. This is how it's done:
     - `> GRANT SELECT, INSERT, UPDATE, DELETE ON bmi.* to 'bmi'@'localhost';`
 10. Check everything is okay:
     - `> show grants for 'bmi'@'localhost';`
-    - `> show user, host from mysql.user;`
+    - `> select user, host from mysql.user;`
 
 ## C) Set up environment variables for database user credentials:
 
