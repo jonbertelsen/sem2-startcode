@@ -14,7 +14,7 @@ deploy our websites manually. This is how it's done:
     1. From localhost machine: Open a terminal in the folder with bmi.sql and run this command:
     2. `> scp bmi.sql brugernavn@ipnummer:/home/brugernavn`
 5.  Log into mysql on your Droplet through the terminal: `mysql -u root -p`
-6.  Import your bmi database: `> source /home/jobe/sql/bmi.sql;`
+6.  Import your bmi database: `> source /home/jobe/bmi.sql;`
 7.  Check the database is imported correctly:
     - `> show databases;`
     - `> use bmi;`
