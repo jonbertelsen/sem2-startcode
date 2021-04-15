@@ -158,7 +158,9 @@ into the constructor of the `Database.java`. This is called `dependency injectio
 that we wish to be able to change the connection string and user credentials when testing the 
 class. And using `dependency injection` is a way to provide that possibility.
 
+## How to deploy the website to a Droplet on Digital Ocean
 
+Please follow this [deployment-guide](documentation/deployment.md) to migrate your local development version to a Droplet at Digital Ocean.
 
 
 
