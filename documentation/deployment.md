@@ -7,7 +7,7 @@ deploy our websites manually. This is how it's done:
 ## A) Migrate your database to the Droplet:
 
 1. Export the bmi-database from Workbench to the file `bmi.sql`: Server | Data export. Make sure that you copy
-   both structure and data.
+   both structure and data (tick the `include create schema` checkbox).
 2. Open the file in Workbench and check that all table names are in lower case.
 3. Log into your Droplet: `> ssh brugernavn@ipnumber`
 4. Copy bmi.sql to the Droplet:
