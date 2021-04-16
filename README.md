@@ -67,7 +67,7 @@ You need three main steps to get started:
         2. Change the name sem2-startcode in the pom.xml file where needed
     3.  Rename the database names in two places:
         1. In the top of the FrontController.java file: Change `startcode` in the jdbc string `jdbc:mysql://localhost:3306/startcode?serverTimezone=CET`
-        2. In the top of the UserMapperTest.java class, change the `startcode_test` in the jdbc string.
+        2. In the top of the UserMapperTest.java class, set the name of your database in the constant "DATABASE".
     4. Create a Tomcat configuration by running the project
 
 
