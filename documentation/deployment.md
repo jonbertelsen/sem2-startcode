@@ -4,6 +4,15 @@ The webproject is developed locally. Running on a local
 Tomcat container and MySql server. On this semester, we
 deploy our websites manually. This is how it's done:
 
+## The hosting environment
+
+We expect that you have the following setup running at Digital Ocean:
+
+1. You have set up a Ubuntu server by following [this tutorial](https://cphbusiness.mrooms.net/mod/book/view.php?id=325358&chapterid=4695).
+2. You have installed MySql Server 8 on the Droplet following [this tutorial](https://cphbusiness.mrooms.net/mod/book/view.php?id=325358&chapterid=4694).
+3. You have installed Tomcat 9 on the Drolet following [this tuturial](https://cphbusiness.mrooms.net/mod/book/view.php?id=325358&chapterid=4696).
+4. You have ssh access to your Droplet
+
 ## A) Migrate your database to the Droplet:
 
 1. Export the bmi-database from Workbench to the file `bmi.sql`: Server | Data export. Make sure that you copy
