@@ -20,12 +20,16 @@ basic skills and techniques. Step by step.
 
 **The startcode makes use of several design patterns:**
 
-- Model View Controller (MVC pattern)
-- Frontcontroller pattern
-- Command pattern
-- Singleton pattern
-- Facade pattern
-- Dependency injection
+- [Model View Controller (MVC pattern)](https://www.codecademy.com/articles/mvc)
+- [Multi layer architecture](https://en.wikipedia.org/wiki/Multitier_architecture)
+- [Frontcontroller pattern](https://en.wikipedia.org/wiki/Front_controller)
+- [Command pattern](https://en.wikipedia.org/wiki/Command_pattern)
+- [Singleton pattern](https://en.wikipedia.org/wiki/Singleton_pattern)
+- [Facade pattern](https://en.wikipedia.org/wiki/Facade_pattern)
+- [Dependency injection - constructor](https://en.wikipedia.org/wiki/Dependency_injection)
+- [High cohesion](https://en.wikipedia.org/wiki/Cohesion_(computer_science))
+- [Low coupling](https://en.wikipedia.org/wiki/Coupling_(computer_programming))
+
 
 **The startcode contains these features out of the box:**
 
